@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Annaliza Botsio — Marketing Executive</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f4f0;
+      --bg-alt: #f0ece6;
+      --card: #ffffff;
+      --border: #e0dbd3;
+      --border-dark: #ccc6bc;
+      --ink: #1c1916;
+      --ink-mid: #3d3830;
+      --muted: #8a8076;
+      --gold: #9a7a45;
+      --gold-soft: rgba(154,122,69,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(247,244,240,0.93); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.5rem 1.3rem; text-decoration: none; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--ink); color: var(--bg); }
+
+    /* HERO */
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1.1fr 0.9fr; align-items: center; padding: 9rem 3rem 5rem; border-bottom: 1px solid var(--border); position: relative; }
+    .hero-divider { position: absolute; left: 58%; top: 0; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, var(--border) 15%, var(--border) 85%, transparent); }
+    .hero-label { font-family: 'DM Mono', monospace; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
+    .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3.5rem, 6vw, 6.5rem); font-weight: 900; line-height: 0.93; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.35em; opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
+    .hero-name em { font-style: italic; color: var(--gold); }
+    .hero-subtitle { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
+    .hero-desc { font-size: 1.02rem; color: var(--ink-mid); max-width: 430px; line-height: 1.75; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.65s forwards; }
+    .hero-desc strong { color: var(--ink); font-weight: 500; }
+    .hero-actions { display: flex; gap: 1rem; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; }
+    .btn-primary { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--ink); color: var(--bg); padding: 0.85rem 2rem; text-decoration: none; transition: background 0.2s; }
+    .btn-primary:hover { background: var(--gold); }
+    .btn-secondary { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border-dark); color: var(--ink-mid); padding: 0.85rem 2rem; text-decoration: none; transition: all 0.2s; }
+    .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-right { padding-left: 4rem; opacity: 0; animation: fadeUp 0.8s 0.95s forwards; }
+    .hero-stats-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+    .hero-stat { padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
+    .hero-stat:first-of-type { border-top: 1px solid var(--border); }
+    .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; color: var(--ink); line-height: 1; margin-bottom: 0.3rem; }
+    .hero-stat-num span { color: var(--gold); }
+    .hero-stat-text { font-size: 0.8rem; color: var(--muted); }
+
+    /* NUMBERS STRIP */
+    #numbers { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ink); }
+    .num-item { padding: 3rem 2.5rem; border-right: 1px solid rgba(255,255,255,0.08); transition: background 0.3s; }
+    .num-item:last-child { border-right: none; }
+    .num-item:hover { background: rgba(255,255,255,0.04); }
+    .num-value { font-family: 'Playfair Display', serif; font-size: 2.6rem; font-weight: 700; color: #f7f4f0; line-height: 1; margin-bottom: 0.5rem; }
+    .num-value span { color: #c9a86c; }
+    .num-label { font-size: 0.77rem; color: rgba(247,244,240,0.5); max-width: 170px; line-height: 1.5; }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; border-bottom: 1px solid var(--border); }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
+    .section-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--gold); }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; }
+
+    /* ABOUT */
+    #about { background: var(--bg-alt); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 1rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.4rem; }
+    .about-text strong { color: var(--ink); font-weight: 500; }
+    .detail-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
+    .detail-key { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+    .detail-val { font-size: 0.85rem; color: var(--ink-mid); text-align: right; line-height: 1.5; }
+
+    /* CASES */
+    #work .cases { display: flex; flex-direction: column; gap: 3px; }
+    .case { background: var(--card); border: 1px solid var(--border); overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s; }
+    .case:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(154,122,69,0.07); }
+    .case-header { display: grid; grid-template-columns: 60px 1fr auto; align-items: center; gap: 2rem; padding: 2rem 2.5rem; cursor: pointer; }
+    .case-num { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--border-dark); }
+    .case-brand { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .case-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
+    .case-right { display: flex; align-items: center; gap: 1.5rem; }
+    .case-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; justify-content: flex-end; }
+    .tag { font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 0.28rem 0.65rem; }
+    .case-toggle { font-size: 1.3rem; color: var(--muted); transition: transform 0.3s, color 0.2s; flex-shrink: 0; }
+    .case.open .case-toggle { transform: rotate(45deg); color: var(--gold); }
+    .case-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .case.open .case-body { max-height: 900px; }
+    .case-inner { padding: 2rem 2.5rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; border-top: 1px solid var(--border); }
+    .case-desc { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.8; }
+    .case-desc p + p { margin-top: 1rem; }
+    .case-results { display: flex; flex-direction: column; gap: 1.2rem; }
+    .result-item { display: flex; align-items: baseline; gap: 1rem; }
+    .result-num { font-family: 'Playfair Display', serif; font-size: 1.75rem; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+    .result-label { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+
+    /* SKILLS */
+    #skills { background: var(--bg-alt); }
+    .skills-wrapper { display: flex; flex-direction: column; gap: 4rem; }
+    .skills-category-title { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); }
+    .skill-block { background: var(--card); padding: 2rem 2.2rem; transition: background 0.3s; }
+    .skill-block:hover { background: #fdfaf7; }
+    .skill-icon { font-size: 1.2rem; margin-bottom: 0.8rem; }
+    .skill-name { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 0.7rem; }
+    .skill-tools { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.04em; color: var(--muted); line-height: 1.9; }
+    .soft-skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .soft-skill { background: var(--card); border: 1px solid var(--border); padding: 1.4rem 1.5rem; transition: border-color 0.2s, box-shadow 0.2s; }
+    .soft-skill:hover { border-color: var(--gold); box-shadow: 0 2px 12px rgba(154,122,69,0.07); }
+    .soft-skill-name { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 0.4rem; }
+    .soft-skill-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+    /* DISSERTATION */
+    #dissertation { background: var(--ink); }
+    #dissertation .section-title { color: #f7f4f0; }
+    #dissertation .section-num { color: #c9a86c; }
+    .diss-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .diss-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: #c9a86c; margin-bottom: 0.8rem; }
+    .diss-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: #f7f4f0; line-height: 1.3; margin-bottom: 1.2rem; }
+    .diss-body { font-size: 0.9rem; color: rgba(247,244,240,0.65); line-height: 1.8; }
+    .diss-body p + p { margin-top: 1rem; }
+    .diss-meta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .diss-tag { font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(247,244,240,0.4); border: 1px solid rgba(255,255,255,0.1); padding: 0.3rem 0.7rem; }
+    .diss-findings { display: flex; flex-direction: column; gap: 1.2rem; }
+    .diss-finding { border: 1px solid rgba(255,255,255,0.1); padding: 1.4rem 1.5rem; transition: border-color 0.2s; }
+    .diss-finding:hover { border-color: rgba(201,168,108,0.4); }
+    .diss-finding-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: #c9a86c; margin-bottom: 0.5rem; }
+    .diss-finding-text { font-size: 0.85rem; color: rgba(247,244,240,0.75); line-height: 1.6; }
+
+    /* EXPERIENCE */
+    .exp-item { display: grid; grid-template-columns: 190px 1fr; gap: 3rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border); position: relative; }
+    .exp-item::before { content: ''; position: absolute; left: 200px; top: 2.9rem; width: 7px; height: 7px; border-radius: 50%; background: var(--bg); border: 1.5px solid var(--gold); }
+    .exp-date { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted); padding-top: 0.1rem; line-height: 1.7; }
+    .exp-company { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .exp-role { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 700; color: var(--ink); margin-bottom: 0.7rem; }
+    .exp-desc { font-size: 0.85rem; color: var(--ink-mid); line-height: 1.75; max-width: 580px; }
+
+    /* CONTACT */
+    #contact { text-align: center; padding: 8rem 3rem; position: relative; overflow: hidden; }
+    #contact::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, var(--gold-soft) 0%, transparent 70%); pointer-events: none; }
+    .contact-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .contact-heading { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 5vw, 5rem); font-weight: 900; line-height: 1; color: var(--ink); margin-bottom: 1.5rem; }
+    .contact-heading em { font-style: italic; color: var(--gold); }
+    .contact-sub { font-size: 1rem; color: var(--muted); margin: 0 auto 3rem; max-width: 420px; line-height: 1.7; }
+    .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: var(--ink); font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; color: rgba(247,244,240,0.3); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 4rem; }
+      .hero-right { padding-left: 0; margin-top: 3rem; }
+      .hero-divider { display: none; }
+      #numbers { grid-template-columns: repeat(2, 1fr); }
+      section { padding: 4rem 1.5rem; }
+      .about-grid, .diss-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr !important; }
+      .soft-skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .case-inner { grid-template-columns: 1fr; }
+      .case-header { grid-template-columns: 50px 1fr; }
+      .case-right { display: none; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .exp-item::before { display: none; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">AB</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#dissertation">Research</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Let's Talk</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-divider"></div>
+  <div>
+    <div class="hero-label">Marketing Executive</div>
+    <h1 class="hero-name">Annaliza<br><em>Botsio</em></h1>
+    <p class="hero-subtitle">Email · Paid Social · SEO · Content Strategy</p>
+    <p class="hero-desc">I generated <strong>£282,990 in email revenue</strong> in six months — mostly solo. Multi-channel marketer with a proven track record across healthcare, wellness, and third-sector brands.</p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-primary">View Case Studies</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-stats-label">Proof of work</p>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><span>£282,990</span></div>
+      <div class="hero-stat-text">Email revenue generated — 6 months</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">267,544</div>
+      <div class="hero-stat-text">Users driven to Face Dr — 90% new audiences</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num"><span>£0.23</span></div>
+      <div class="hero-stat-text">Average CPC on Meta Ads — well below industry average</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">1<span>st</span></div>
+      <div class="hero-stat-text">Class degree, Marketing & Business, Abertay University</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS STRIP -->
+<div id="numbers">
+  <div class="num-item">
+    <div class="num-value"><span>69.54%</span></div>
+    <div class="num-label">Increase in Google search visibility</div>
+  </div>
+  <div class="num-item">
+    <div class="num-value">267<span> domains</span></div>
+    <div class="num-label">Referring domains incl. The Mirror, MEN, Glam.com</div>
+  </div>
+  <div class="num-item">
+    <div class="num-value"><span>1,867%</span></div>
+    <div class="num-label">Peak traffic uplift on a single optimised article</div>
+  </div>
+  <div class="num-item">
+    <div class="num-value">140<span>+</span></div>
+    <div class="num-label">Blog articles audited across 4 international markets</div>
+  </div>
+</div>
+
+
+<!-- CASE STUDIES -->
+<section id="work">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Case Studies</h2>
+  </div>
+  <div class="cases">
+
+    <div class="case reveal" onclick="toggleCase(this)">
+      <div class="case-header">
+        <div class="case-num">01</div>
+        <div><div class="case-brand">Tay Medispa</div><div class="case-title">£282,990 in Email Revenue — 6 Months</div></div>
+        <div class="case-right">
+          <div class="case-tags"><span class="tag">Email Marketing</span><span class="tag">Klaviyo</span><span class="tag">Strategy</span></div>
+          <div class="case-toggle">+</div>
+        </div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-desc">
+          <p>Tay Medispa had one newsletter per week. I scaled to 2–3 tailored, audience-specific sends, built a structured monthly campaign calendar, and introduced segmentation to ensure every send reached the right audience at the right moment.</p>
+          <p>Alongside email, I led the full content strategy: Instagram, Facebook, TikTok, YouTube, content shoots, and seasonal campaigns — Valentine's Day, Mother's Day, HydraFacial course launches — all within existing tools and budget.</p>
+        </div>
+        <div class="case-results">
+          <div class="result-item"><div class="result-num">£282,990</div><div class="result-label">Revenue from email campaigns in 6 months</div></div>
+          <div class="result-item"><div class="result-num">3×</div><div class="result-label">Weekly newsletter volume scaled (1 → 3 tailored sends)</div></div>
+          <div class="result-item"><div class="result-num">Solo</div><div class="result-label">Full marketing operation managed independently end-to-end</div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case reveal" onclick="toggleCase(this)">
+      <div class="case-header">
+        <div class="case-num">02</div>
+        <div><div class="case-brand">Face Dr</div><div class="case-title">SEO Growth: 69.54% Visibility Increase</div></div>
+        <div class="case-right">
+          <div class="case-tags"><span class="tag">SEO</span><span class="tag">Content</span><span class="tag">International</span></div>
+          <div class="case-toggle">+</div>
+        </div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-desc">
+          <p>I audited and optimised 140+ blog articles across UK, Irish, Australian, and US versions of the Face Dr site — refreshing keyword strategy, metadata, headings, and internal links via Mangools. Key product pages including ZO Complexion Renewal Pads were elevated to top 3 Google results.</p>
+          <p>Organic search became the dominant acquisition channel at 55–70% of all traffic, and content earned backlinks from 267 referring domains including The Mirror, Manchester Evening News, and Glam.com.</p>
+        </div>
+        <div class="case-results">
+          <div class="result-item"><div class="result-num">69.54%</div><div class="result-label">Increase in Google search visibility</div></div>
+          <div class="result-item"><div class="result-num">£116k+</div><div class="result-label">Tracked organic search revenue at Face Dr</div></div>
+          <div class="result-item"><div class="result-num">1,867%</div><div class="result-label">Peak traffic uplift on a single optimised article</div></div>
+          <div class="result-item"><div class="result-num">267</div><div class="result-label">Referring domains earned through content</div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case reveal" onclick="toggleCase(this)">
+      <div class="case-header">
+        <div class="case-num">03</div>
+        <div><div class="case-brand">Face Dr</div><div class="case-title">Meta Ads: £0.23 CPC, 75,000+ Accounts Reached</div></div>
+        <div class="case-right">
+          <div class="case-tags"><span class="tag">Paid Social</span><span class="tag">Meta Ads</span><span class="tag">Performance</span></div>
+          <div class="case-toggle">+</div>
+        </div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-desc">
+          <p>Managed and optimised Meta Ads across three campaign cycles, refining targeting, creative, and bidding strategy each round. From a total spend of £659.83, campaigns drove 2,817 link clicks reaching over 75,000 accounts — performance improving consistently each cycle.</p>
+          <p>Even during active paid campaigns, organic search remained dominant at 68–70% of sessions — reflecting the strength of the SEO strategy running in parallel.</p>
+        </div>
+        <div class="case-results">
+          <div class="result-item"><div class="result-num">£0.23</div><div class="result-label">Average CPC — well below industry benchmarks</div></div>
+          <div class="result-item"><div class="result-num">2.26%</div><div class="result-label">Peak click-through rate</div></div>
+          <div class="result-item"><div class="result-num">75k+</div><div class="result-label">Accounts reached from £659.83 total spend</div></div>
+          <div class="result-item"><div class="result-num">£184,998</div><div class="result-label">Total website revenue during the campaign period</div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="case reveal" onclick="toggleCase(this)">
+      <div class="case-header">
+        <div class="case-num">04</div>
+        <div><div class="case-brand">Face Dr</div><div class="case-title">Blog Audit: 144% Traffic Growth Across 140+ Articles</div></div>
+        <div class="case-right">
+          <div class="case-tags"><span class="tag">Content Strategy</span><span class="tag">SEO</span><span class="tag">Audit</span></div>
+          <div class="case-toggle">+</div>
+        </div>
+      </div>
+      <div class="case-body"><div class="case-inner">
+        <div class="case-desc">
+          <p>When I joined Face Dr the blog had 140+ articles — many published years earlier and never revisited. I audited every article, prioritising pages with high search potential but outdated content or weak structure, then refreshed copy, metadata, and internal linking for each.</p>
+          <p>The results compounded over time — proving that systematic optimisation of existing content can outperform simply creating new content.</p>
+        </div>
+        <div class="case-results">
+          <div class="result-item"><div class="result-num">144%</div><div class="result-label">Total blog view increase across the catalogue</div></div>
+          <div class="result-item"><div class="result-num">70%</div><div class="result-label">Growth in new users from blog content</div></div>
+          <div class="result-item"><div class="result-num">1,100%</div><div class="result-label">Average view growth across top 10 optimised articles</div></div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- DISSERTATION -->
+<section id="dissertation">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Academic Research</h2>
+  </div>
+  <div class="diss-grid">
+    <div class="reveal">
+      <div class="diss-label">BA (Hons) Marketing Dissertation — First Class Honours</div>
+      <div class="diss-title">The Psychology of Advertising: Self-Monitoring & Purchase Intentions</div>
+      <div class="diss-body">
+        <p>This research explored how the personality trait of self-monitoring affects consumer purchase intentions towards different advertising styles — specifically self-enhancing (aspirational) versus self-deprecating (authentic) messaging.</p>
+        <p>Using a 2×2 factorial ANOVA design with 152 participants, the study found that self-monitoring significantly moderates advertising response. Low self-monitors showed meaningfully higher purchase intentions towards authentic, honest advertising — a finding with direct implications for brands in wellness and healthcare that rely on trust-based communication.</p>
+        <p>The research contributes to an underexplored area of consumer psychology, and the findings directly inform how I approach audience segmentation and message framing in my own campaigns.</p>
+      </div>
+      <div class="diss-meta">
+        <span class="diss-tag">Consumer Psychology</span>
+        <span class="diss-tag">Quantitative Research</span>
+        <span class="diss-tag">ANOVA</span>
+        <span class="diss-tag">Advertising Strategy</span>
+        <span class="diss-tag">First Class</span>
+      </div>
+    </div>
+    <div class="diss-findings reveal">
+      <div class="diss-finding">
+        <div class="diss-finding-label">H1 — Supported</div>
+        <div class="diss-finding-text">Self-monitoring significantly moderates the effect of advertising style on purchase intentions. The interaction effect was confirmed through factorial ANOVA.</div>
+      </div>
+      <div class="diss-finding">
+        <div class="diss-finding-label">H1b — Supported</div>
+        <div class="diss-finding-text">Low self-monitors showed significantly higher purchase intentions towards self-deprecating advertising (M=10.94) vs. self-enhancing (M=8.44). Medium effect size — Cohen's d = .596.</div>
+      </div>
+      <div class="diss-finding">
+        <div class="diss-finding-label">Marketing Implication</div>
+        <div class="diss-finding-text">Authentic, performance-led messaging outperforms aspirational advertising for audiences who prioritise genuine product value — directly relevant for healthcare and wellness brands.</div>
+      </div>
+      <div class="diss-finding">
+        <div class="diss-finding-label">How It Shapes My Work</div>
+        <div class="diss-finding-text">Message framing and audience psychology sit at the heart of how I approach content and campaign strategy — understanding who you're talking to is just as important as what you say.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Experience</h2>
+  </div>
+  <div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Oct 2024 – Present<br>UK · Hybrid</div>
+      <div><div class="exp-company">Face Dr & Tay Medispa</div><div class="exp-role">Marketing Executive</div><div class="exp-desc">Managed full digital marketing across two healthcare and wellness brands simultaneously — email, paid social, SEO, content strategy, and international market management. Generated £282,990 in email revenue and grew organic search to 55%+ of all traffic.</div></div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Sep 2023 – Dec 2024<br>Scotland</div>
+      <div><div class="exp-company">Saltire Programmes</div><div class="exp-role">Brand Ambassador Lead Liaison</div><div class="exp-desc">Developed and delivered strategic outreach campaigns to promote the Saltire Scholarship to student audiences. Led stakeholder engagement, event planning, and public speaking.</div></div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jul – Oct 2024<br>Montrose, Scotland</div>
+      <div><div class="exp-company">Rossie</div><div class="exp-role">Marketing Intern</div><div class="exp-desc">Enhanced digital presence through website UX optimisation and data-driven social media strategy for a third-sector organisation using WordPress and content management tools.</div></div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun – Aug 2023<br>Pennsylvania, US · Remote</div>
+      <div><div class="exp-company">PE GI Solutions</div><div class="exp-role">Marketing Intern</div><div class="exp-desc">Market research, social media management, content creation, and copywriting. Used Hootsuite, MailChimp, and SEO tools in a US B2B environment.</div></div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Jun 2021 – Jul 2024<br>Dundee, Scotland</div>
+      <div><div class="exp-company">Abertay University</div><div class="exp-role">Brand & Outreach Ambassador / Student Experience Assistant</div><div class="exp-desc">Delivered targeted recruitment communications and prospective student engagement for 3 years alongside event support and cross-departmental student-facing activities.</div></div>
+    </div>
+    <div class="exp-item reveal">
+      <div class="exp-date">Feb – Apr 2023<br>Dundee, Scotland</div>
+      <div><div class="exp-company">Hillcrest</div><div class="exp-role">Marketing Intern</div><div class="exp-desc">Supported marketing and fundraising through content creation, social assets, video editing, and stakeholder research for a social enterprise.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-label reveal">Let's Work Together</div>
+  <h2 class="contact-heading reveal">Ready to drive<br><em>real results?</em></h2>
+  <p class="contact-sub reveal">Available for full-time roles and freelance projects across marketing, content, and digital strategy.</p>
+  <div class="contact-links reveal">
+    <a href="mailto:your@email.com" class="btn-primary">Send Me an Email</a>
+    <a href="https://linkedin.com/in/annalizabotsio" target="_blank" class="btn-secondary">LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Annaliza Botsio</span>
+  <span>Marketing Executive</span>
+  <span>Built with intention.</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  function toggleCase(el) {
+    const isOpen = el.classList.contains('open');
+    document.querySelectorAll('.case').forEach(c => c.classList.remove('open'));
+    if (!isOpen) el.classList.add('open');
+  }
+</script>
+</body>
+</html>
