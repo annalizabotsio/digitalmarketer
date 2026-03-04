@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Experience — Annaliza Botsio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f4f0;
+      --bg-alt: #f0ece6;
+      --card: #ffffff;
+      --border: #e0dbd3;
+      --border-dark: #ccc6bc;
+      --ink: #1c1916;
+      --ink-mid: #3d3830;
+      --muted: #8a8076;
+      --gold: #9a7a45;
+      --gold-soft: rgba(154,122,69,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(247,244,240,0.93); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.5rem 1.3rem; text-decoration: none; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--ink); color: var(--bg); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: 'DM Mono', monospace; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+    .nav-mobile a:hover, .nav-mobile a.active { color: var(--gold); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 10rem 3rem 5rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+    .page-label { font-family: 'DM Mono', monospace; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 6rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; color: var(--ink); }
+    .page-title em { font-style: italic; color: var(--gold); }
+    .page-desc { font-size: 1rem; color: var(--muted); max-width: 380px; line-height: 1.7; text-align: right; }
+
+    /* SECTION WRAPPER */
+    .section-wrapper { padding: 5rem 3rem; border-bottom: 1px solid var(--border); }
+    .section-wrapper.alt { background: var(--bg-alt); }
+    .section-top { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3.5rem; }
+    .section-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--gold); }
+    .section-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; color: var(--ink); line-height: 1; }
+    .section-heading em { font-style: italic; color: var(--gold); }
+
+    /* TIMELINE */
+    .timeline { display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+
+    .timeline-entry { background: var(--card); display: grid; grid-template-columns: 220px 1fr; }
+    .timeline-entry.current { background: var(--ink); }
+
+    .entry-aside { padding: 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.5rem; }
+    .timeline-entry.current .entry-aside { border-right-color: rgba(255,255,255,0.08); }
+
+    .entry-dates { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); line-height: 1.6; }
+    .timeline-entry.current .entry-dates { color: rgba(247,244,240,0.4); }
+
+    .entry-badge { display: inline-block; margin-top: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid var(--gold); color: var(--gold); align-self: flex-start; }
+    .entry-badge.current-badge { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+
+    .entry-type { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-top: auto; }
+    .timeline-entry.current .entry-type { color: rgba(247,244,240,0.25); }
+
+    .entry-main { padding: 2.5rem; }
+
+    .entry-company { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .timeline-entry.current .entry-company { color: #c9a86c; }
+
+    .entry-title { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 1.2rem; }
+    .timeline-entry.current .entry-title { color: #f7f4f0; }
+
+    .entry-bullets { display: flex; flex-direction: column; gap: 0.55rem; margin-bottom: 1.4rem; }
+    .entry-bullet { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.86rem; color: var(--ink-mid); line-height: 1.6; }
+    .timeline-entry.current .entry-bullet { color: rgba(247,244,240,0.65); }
+    .bullet-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 0.6rem; }
+    .timeline-entry.current .bullet-dot { background: #c9a86c; }
+
+    .entry-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .entry-tag { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 0.2rem 0.55rem; }
+    .timeline-entry.current .entry-tag { color: rgba(247,244,240,0.35); border-color: rgba(255,255,255,0.1); }
+
+    /* EDUCATION */
+    .edu-entries { display: flex; flex-direction: column; gap: 2px; background: var(--border); }
+    .edu-entry { background: var(--card); display: grid; grid-template-columns: 220px 1fr; }
+
+    .edu-aside { padding: 2.5rem; border-right: 1px solid var(--border); display: flex; flex-direction: column; gap: 0.5rem; }
+    .edu-dates { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.12em; color: var(--muted); line-height: 1.6; }
+    .edu-result { display: inline-block; margin-top: 0.5rem; font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.25rem 0.6rem; border: 1px solid var(--gold); color: var(--gold); align-self: flex-start; }
+
+    .edu-main { padding: 2.5rem; }
+    .edu-institution { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.4rem; }
+    .edu-degree { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 1rem; }
+    .edu-awards { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .edu-award { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); border: 1px solid var(--border-dark); padding: 0.25rem 0.65rem; }
+    .edu-note { font-size: 0.83rem; color: var(--muted); line-height: 1.65; border-left: 2px solid var(--gold); padding-left: 1rem; margin-bottom: 1.5rem; }
+
+    /* MODULES TOGGLE */
+    .modules-toggle { display: flex; align-items: center; gap: 0.75rem; cursor: pointer; background: none; border: none; padding: 0; }
+    .modules-toggle-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink-mid); }
+    .modules-toggle-icon { width: 26px; height: 26px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--muted); transition: all 0.3s; flex-shrink: 0; }
+    .modules-toggle.open .modules-toggle-icon { transform: rotate(45deg); border-color: var(--gold); color: var(--gold); }
+    .modules-body { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+    .modules-body.open { max-height: 600px; }
+    .modules-grid { padding-top: 1.5rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); }
+    .module-year { background: var(--bg); padding: 1.4rem 1.8rem; }
+    .module-year-label { font-family: 'DM Mono', monospace; font-size: 0.52rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.9rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+    .module-list { display: flex; flex-direction: column; gap: 0.5rem; }
+    .module-item { display: flex; align-items: flex-start; gap: 0.55rem; font-size: 0.8rem; color: var(--ink-mid); line-height: 1.4; }
+    .module-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 0.45rem; }
+
+    /* FOOTER */
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: var(--ink); font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; color: rgba(247,244,240,0.3); }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      .page-header { flex-direction: column; padding: 8rem 1.5rem 3rem; }
+      .page-desc { text-align: left; }
+      .section-wrapper { padding: 3rem 1.5rem; }
+      .timeline-entry { grid-template-columns: 1fr; }
+      .entry-aside { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+      .timeline-entry.current .entry-aside { border-bottom-color: rgba(255,255,255,0.08); }
+      .entry-type { margin-top: 0; }
+      .entry-main { padding: 1.5rem; }
+      .edu-entry { grid-template-columns: 1fr; }
+      .edu-aside { border-right: none; border-bottom: 1px solid var(--border); padding: 1.5rem; flex-direction: row; flex-wrap: wrap; align-items: center; gap: 0.75rem; }
+      .edu-main { padding: 1.5rem; }
+      .modules-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AB</a>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="media.html">Media</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="experience.html" class="active">Experience</a></li>
+    <li><a href="research.html">Research</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Let's Talk</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-mobile" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">About</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="media.html" onclick="toggleMenu()">Media</a>
+  <a href="skills.html" onclick="toggleMenu()">Skills</a>
+  <a href="experience.html" class="active" onclick="toggleMenu()">Experience</a>
+  <a href="research.html" onclick="toggleMenu()">Research</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Let's Talk</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header reveal">
+  <div>
+    <div class="page-label">Background</div>
+    <h1 class="page-title">Experience &<br><em>Education</em></h1>
+  </div>
+  <p class="page-desc">A track record built across healthcare, third-sector, and international organisations — plus the academic foundation behind it.</p>
+</div>
+
+<!-- WORK EXPERIENCE -->
+<div class="section-wrapper reveal">
+  <div class="section-top">
+    <span class="section-num">01</span>
+    <h2 class="section-heading">Work<br><em>History</em></h2>
+  </div>
+
+  <div class="timeline">
+
+    <!-- FACE DR — CURRENT -->
+    <div class="timeline-entry reveal">
+      <div class="entry-aside">
+        <div class="entry-dates">Oct 2024<br>— Present</div>
+        <span class="entry-badge current-badge">Current</span>
+        <div class="entry-type">Full-time · Hybrid</div>
+      </div>
+      <div class="entry-main">
+        <div class="entry-company">Face Dr & Tay Medispa · United Kingdom</div>
+        <div class="entry-title">Marketing Executive</div>
+        <div class="entry-bullets">
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Planned and executed multi-channel campaigns across the full marketing mix — aligning content, email, social, and paid activity with commercial objectives and brand strategy</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Produced credible, medically-informed content across 165+ articles for a health-conscious audience covering skincare, treatments, and clinical procedures</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Built and managed email campaigns via Klaviyo and Phorest — copy, segmentation, and lifecycle communications contributing to £282,990 in revenue over six months</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Managed SEO strategy across two websites and international markets — growing organic search to 55% of all website traffic</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Managed social content and community engagement across Instagram, TikTok, Facebook, and YouTube — production, scheduling, and performance reporting</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Produced monthly performance reports for senior stakeholders, measuring campaign effectiveness and identifying growth opportunities</span></div>
+        </div>
+        <div class="entry-tags">
+          <span class="entry-tag">SEO</span>
+          <span class="entry-tag">Email Marketing</span>
+          <span class="entry-tag">Klaviyo</span>
+          <span class="entry-tag">Paid Social</span>
+          <span class="entry-tag">Content Strategy</span>
+          <span class="entry-tag">Google Analytics</span>
+          <span class="entry-tag">Social Media</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROSSIE -->
+    <div class="timeline-entry reveal">
+      <div class="entry-aside">
+        <div class="entry-dates">Jul 2024<br>— Oct 2024</div>
+        <span class="entry-badge">Internship</span>
+        <div class="entry-type">Hybrid · Scotland</div>
+      </div>
+      <div class="entry-main">
+        <div class="entry-company">Rossie Young People Trust · Montrose</div>
+        <div class="entry-title">Marketing Intern</div>
+        <div class="entry-bullets">
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Created accessible digital content and optimised website copy and UX for a not-for-profit young people's wellbeing organisation</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Developed social media campaigns and analysed performance data to inform content strategy</span></div>
+        </div>
+        <div class="entry-tags">
+          <span class="entry-tag">WordPress</span>
+          <span class="entry-tag">UX</span>
+          <span class="entry-tag">Content</span>
+          <span class="entry-tag">Data Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCA HEALTH -->
+    <div class="timeline-entry reveal">
+      <div class="entry-aside">
+        <div class="entry-dates">Jun 2023<br>— Aug 2023</div>
+        <span class="entry-badge">Internship</span>
+        <div class="entry-type">Remote · Pennsylvania, USA</div>
+      </div>
+      <div class="entry-main">
+        <div class="entry-company">SCA Health · Pennsylvania, USA</div>
+        <div class="entry-title">Digital Marketing & Content Intern</div>
+        <div class="entry-bullets">
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Produced SEO-optimised healthcare content and website copy for a US clinical provider — writing for both patient and professional audiences on medical topics</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Managed organic social channels and supported multi-channel digital content production</span></div>
+        </div>
+        <div class="entry-tags">
+          <span class="entry-tag">SEO</span>
+          <span class="entry-tag">Copywriting</span>
+          <span class="entry-tag">Social Media</span>
+          <span class="entry-tag">Mailchimp</span>
+          <span class="entry-tag">Hootsuite</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- HILLCREST -->
+    <div class="timeline-entry reveal">
+      <div class="entry-aside">
+        <div class="entry-dates">Feb 2023<br>— Apr 2023</div>
+        <span class="entry-badge">Internship</span>
+        <div class="entry-type">Hybrid · Dundee</div>
+      </div>
+      <div class="entry-main">
+        <div class="entry-company">Hillcrest · Dundee</div>
+        <div class="entry-title">Marketing Intern</div>
+        <div class="entry-bullets">
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Created social media assets, email templates, and stakeholder surveys for a not-for-profit social care organisation</span></div>
+        </div>
+        <div class="entry-tags">
+          <span class="entry-tag">Content Creation</span>
+          <span class="entry-tag">Email</span>
+          <span class="entry-tag">Market Research</span>
+          <span class="entry-tag">Video Editing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SALTIRE + ABERTAY -->
+    <div class="timeline-entry reveal">
+      <div class="entry-aside">
+        <div class="entry-dates">2021<br>— 2024</div>
+        <span class="entry-badge">Part-time</span>
+        <div class="entry-type">Scotland</div>
+      </div>
+      <div class="entry-main">
+        <div class="entry-company">Saltire Programmes & Abertay University</div>
+        <div class="entry-title">Brand & Outreach Ambassador</div>
+        <div class="entry-bullets">
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Produced social and digital content for student outreach campaigns; supported prospective student engagement and scholarship promotion across both organisations</span></div>
+          <div class="entry-bullet"><div class="bullet-dot"></div><span>Delivered targeted recruitment communications, campus events, and prospective student engagement on behalf of Abertay University</span></div>
+        </div>
+        <div class="entry-tags">
+          <span class="entry-tag">Digital Marketing</span>
+          <span class="entry-tag">Campaign Development</span>
+          <span class="entry-tag">Public Speaking</span>
+          <span class="entry-tag">Event Planning</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- EDUCATION -->
+<div class="section-wrapper alt reveal">
+  <div class="section-top">
+    <span class="section-num">02</span>
+    <h2 class="section-heading">Education &<br><em>Qualifications</em></h2>
+  </div>
+
+  <div class="edu-entries">
+
+    <!-- ABERTAY -->
+    <div class="edu-entry">
+      <div class="edu-aside">
+        <div class="edu-dates">2020 – 2024</div>
+        <span class="edu-result">First Class</span>
+      </div>
+      <div class="edu-main">
+        <div class="edu-institution">University of Abertay Dundee</div>
+        <div class="edu-degree">BA (Hons) Marketing & Business</div>
+        <div class="edu-awards">
+          <span class="edu-award">Principal's Award: Dedication to Employability — 2023</span>
+          <span class="edu-award">Scott Prize: Top First Year — 2021</span>
+        </div>
+        <div class="edu-note">
+          Accredited by the Chartered Institute of Marketing (CIM) — completing this degree counts towards a professional CIM qualification, reflecting the industry-standard rigour of the programme.
+        </div>
+        <button class="modules-toggle" onclick="toggleModules(this)">
+          <span class="modules-toggle-label">View Key Modules</span>
+          <span class="modules-toggle-icon">+</span>
+        </button>
+        <div class="modules-body">
+          <div class="modules-grid">
+            <div class="module-year">
+              <div class="module-year-label">Year 1 — Foundations</div>
+              <div class="module-list">
+                <div class="module-item"><div class="module-dot"></div>Introduction to Marketing</div>
+                <div class="module-item"><div class="module-dot"></div>Nature of Management</div>
+                <div class="module-item"><div class="module-dot"></div>Managing People and Ideas</div>
+                <div class="module-item"><div class="module-dot"></div>Media and the Digital Society</div>
+              </div>
+            </div>
+            <div class="module-year">
+              <div class="module-year-label">Year 2 — Core Marketing</div>
+              <div class="module-list">
+                <div class="module-item"><div class="module-dot"></div>Digital Marketing Principles and Campaigns</div>
+                <div class="module-item"><div class="module-dot"></div>Business Analytics</div>
+                <div class="module-item"><div class="module-dot"></div>People, Planet, Profit</div>
+                <div class="module-item"><div class="module-dot"></div>Theory and Practice in HRM</div>
+              </div>
+            </div>
+            <div class="module-year">
+              <div class="module-year-label">Year 3 — Strategy & Intelligence</div>
+              <div class="module-list">
+                <div class="module-item"><div class="module-dot"></div>Market Intelligence and Consumer Behaviour</div>
+                <div class="module-item"><div class="module-dot"></div>Marketing Communications and Design</div>
+                <div class="module-item"><div class="module-dot"></div>Digital Transformation</div>
+                <div class="module-item"><div class="module-dot"></div>Predictive Analytics</div>
+                <div class="module-item"><div class="module-dot"></div>Employability Analysis and Career Building</div>
+              </div>
+            </div>
+            <div class="module-year">
+              <div class="module-year-label">Year 4 — Advanced Practice</div>
+              <div class="module-list">
+                <div class="module-item"><div class="module-dot"></div>Strategic Marketing</div>
+                <div class="module-item"><div class="module-dot"></div>Brand Management</div>
+                <div class="module-item"><div class="module-dot"></div>Business Ethics in Society</div>
+                <div class="module-item"><div class="module-dot"></div>International Business and Management</div>
+                <div class="module-item"><div class="module-dot"></div>Marketing Dissertation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESSINA -->
+    <div class="edu-entry">
+      <div class="edu-aside">
+        <div class="edu-dates">2014 – 2019</div>
+        <span class="edu-result">First Class</span>
+      </div>
+      <div class="edu-main">
+        <div class="edu-institution">Pessina College, Italy</div>
+        <div class="edu-degree">Advanced Diploma, Psychology & Social Care</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Annaliza Botsio</span>
+  <span>Digital Marketer</span>
+  <span>Built with intention.</span>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  function toggleModules(btn) {
+    btn.classList.toggle('open');
+    btn.nextElementSibling.classList.toggle('open');
+  }
+
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }, 1500);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.01 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
