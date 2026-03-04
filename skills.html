@@ -38,7 +38,15 @@
     .page-title em { font-style: italic; color: var(--gold); }
     .page-desc { font-size: 1rem; color: var(--muted); max-width: 380px; line-height: 1.7; text-align: right; }
 
-    /* DISCIPLINES STRIP */
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: 'DM Mono', monospace; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+    .nav-mobile a:hover, .nav-mobile a.active { color: var(--gold); }
     .disciplines-strip { padding: 4rem 3rem; border-bottom: 1px solid var(--border); }
     .strip-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 2rem; }
     .disciplines-tags { display: flex; flex-wrap: wrap; gap: 0.8rem; }
@@ -78,6 +86,7 @@
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
       .page-header { flex-direction: column; padding: 8rem 1.5rem 3rem; }
       .page-desc { text-align: left; }
       .disciplines-strip { padding: 3rem 1.5rem; }
@@ -102,7 +111,20 @@
     <li><a href="research.html">Research</a></li>
   </ul>
   <a href="index.html#contact" class="nav-cta">Let's Talk</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">About</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="media.html" onclick="toggleMenu()">Media</a>
+  <a href="skills.html" class="active" onclick="toggleMenu()">Skills</a>
+  <a href="experience.html" onclick="toggleMenu()">Experience</a>
+  <a href="research.html" onclick="toggleMenu()">Research</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Let's Talk</a>
+</div>
 
 <!-- PAGE HEADER -->
 <div class="page-header reveal">
@@ -222,6 +244,11 @@
 </footer>
 
 <script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
   setTimeout(() => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }, 1500);
