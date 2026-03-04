@@ -71,10 +71,29 @@
     .ecol-stat-val { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.8); }
     .ecol-stat-val.highlight { color: #c9a86c; font-weight: 500; }
     .ecol-right { display: flex; flex-direction: column; gap: 6px; }
-    .ecol-right .img-placeholder { flex: 1; aspect-ratio: unset; min-height: 140px; }
-    .ecol-right .sample-img { width: 100%; flex: 1; aspect-ratio: unset; min-height: 140px; object-fit: cover; }
     .ecol-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--border); min-height: 280px; }
-.ecol-calendar-img { width: 100%; display: block; margin-top: 6px; border: 1px solid var(--border); object-fit: cover; }
+    .ecol-calendar-wrap { position: relative; margin-top: 6px; }
+    .ecol-calendar-img { width: 100%; display: block; border: 1px solid var(--border); }
+    .ecol-calendar-overlay { position: absolute; inset: 0; background: rgba(28,25,22,0.55); }
+
+    /* SOCIAL COLLAGE */
+    .social-collage { display: flex; flex-direction: column; gap: 6px; width: 100%; }
+    .social-top { display: grid; grid-template-columns: 1.1fr 1fr; gap: 6px; }
+    .scol-dashboard { background: #1a1a2e; padding: 1.8rem; display: flex; flex-direction: column; gap: 0.4rem; position: relative; overflow: hidden; }
+    .scol-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, #c9a86c, #9a7a45); }
+    .scol-platform { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: #c9a86c; }
+    .scol-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #f7f4f0; margin-top: 0.2rem; }
+    .scol-brand { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); margin-bottom: 0.8rem; }
+    .scol-headline { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: #c9a86c; line-height: 1; }
+    .scol-headline-label { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+    .scol-stats { display: flex; flex-direction: column; }
+    .scol-stat { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-top: 1px solid rgba(255,255,255,0.07); gap: 0.5rem; }
+    .scol-stat-name { font-size: 0.68rem; color: rgba(255,255,255,0.45); }
+    .scol-stat-val { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.8); white-space: nowrap; }
+    .scol-stat-val.highlight { color: #c9a86c; font-weight: 500; }
+    .scol-right img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--border); }
+    .social-bottom img { width: 100%; display: block; border: 1px solid var(--border); }
+
     /* PRESS SECTION */
     .press-section { padding: 5rem 3rem; background: var(--bg-alt); border-top: 1px solid var(--border); }
     .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; }
@@ -106,6 +125,7 @@
       .sample { grid-template-columns: 1fr; gap: 2rem; direction: ltr !important; }
       .sample:nth-child(even) { direction: ltr; }
       .email-collage { grid-template-columns: 1fr; }
+      .social-top { grid-template-columns: 1fr; }
       .press-grid { grid-template-columns: 1fr; }
       .press-section { padding: 3rem 1.5rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -139,7 +159,7 @@
 <!-- WORK SAMPLES -->
 <div class="samples-wrapper">
 
-  <!-- 01 SEO BLOG — image already uploaded -->
+  <!-- 01 SEO BLOG -->
   <div class="sample reveal">
     <div class="sample-info">
       <div class="sample-num">01</div>
@@ -157,7 +177,7 @@
     </div>
   </div>
 
-  <!-- 02 EMAIL — collage with stats panel + 2 screenshot slots -->
+  <!-- 02 EMAIL -->
   <div class="sample reveal">
     <div class="sample-info">
       <div class="sample-num">02</div>
@@ -202,10 +222,11 @@
           <img src="emailfd.png" alt="Email campaign design" class="ecol-portrait-img" />
         </div>
       </div>
-<div style="position:relative; margin-top:6px;">
-  <img src="calendaremail1.png" alt="Email content calendar" class="ecol-calendar-img" />
-  <div style="position:absolute; inset:0; background:rgba(28,25,22,0.55);"></div>
-</div>    </div>
+      <div class="ecol-calendar-wrap">
+        <img src="calendaremail1.png" alt="Email content calendar" class="ecol-calendar-img" />
+        <div class="ecol-calendar-overlay"></div>
+      </div>
+    </div>
   </div>
 
   <!-- 03 SOCIAL MEDIA -->
@@ -214,16 +235,58 @@
       <div class="sample-num">03</div>
       <div class="sample-category">Social Media</div>
       <h2 class="sample-title">Social Media Content</h2>
-      <p class="sample-desc">Organic social content scripted, filmed, edited, and published in-house across Instagram, TikTok, Facebook, and YouTube for Face Dr and Tay Medispa. TikTok audience grew 807% with 50,000+ video views.</p>
+      <p class="sample-desc">9 platforms managed across 2 brands — Instagram, Facebook, TikTok, LinkedIn, Pinterest, and YouTube. Organic content scripted, filmed, edited, and published in-house across Face Dr and Tay Medispa.</p>
       <div class="sample-tools">
         <span class="tool-tag">Instagram</span>
         <span class="tool-tag">TikTok</span>
+        <span class="tool-tag">Facebook</span>
+        <span class="tool-tag">LinkedIn</span>
+        <span class="tool-tag">Pinterest</span>
+        <span class="tool-tag">YouTube</span>
         <span class="tool-tag">Canva</span>
-        <span class="tool-tag">Video Editing</span>
       </div>
     </div>
     <div class="sample-visual">
-      <div class="img-placeholder"><span>Upload: social.png</span></div>
+      <div class="social-collage">
+        <div class="social-top">
+          <div class="scol-dashboard">
+            <div class="scol-top-bar"></div>
+            <div class="scol-platform">Face Dr & Tay Medispa</div>
+            <div class="scol-title">Social Media Overview</div>
+            <div class="scol-brand">6 month period</div>
+            <div class="scol-headline">9</div>
+            <div class="scol-headline-label">Platforms managed across 2 brands</div>
+            <div class="scol-stats">
+              <div class="scol-stat">
+                <span class="scol-stat-name">IG · FB · TT · LI (×2 brands)</span>
+                <span class="scol-stat-val">+ Pinterest · YouTube</span>
+              </div>
+              <div class="scol-stat">
+                <span class="scol-stat-name">Reached — Face Dr TikTok</span>
+                <span class="scol-stat-val highlight">36,678</span>
+              </div>
+              <div class="scol-stat">
+                <span class="scol-stat-name">Engaged — Face Dr TikTok</span>
+                <span class="scol-stat-val highlight">6,681</span>
+              </div>
+              <div class="scol-stat">
+                <span class="scol-stat-name">New followers — Face Dr TikTok</span>
+                <span class="scol-stat-val highlight">865</span>
+              </div>
+              <div class="scol-stat">
+                <span class="scol-stat-name">Reached — Meta Ads</span>
+                <span class="scol-stat-val">75,000+</span>
+              </div>
+            </div>
+          </div>
+          <div class="scol-right">
+            <img src="social-tiktok.png" alt="TikTok content" />
+          </div>
+        </div>
+        <div class="social-bottom">
+          <img src="social-instagram.png" alt="Instagram grid" />
+        </div>
+      </div>
     </div>
   </div>
 
@@ -233,7 +296,7 @@
       <div class="sample-num">04</div>
       <div class="sample-category">Presentations</div>
       <h2 class="sample-title">Pitch Decks & Reports</h2>
-      <p class="sample-desc">Performance presentations and pitch decks produced for senior stakeholder meetings at Face Dr and Tay Medispa. Included campaign results, strategic recommendations, and monthly data analysis.</p>
+      <p class="sample-desc">Performance presentations and pitch decks produced for senior stakeholder meetings. Included campaign results, strategic recommendations, and data analysis.</p>
       <div class="sample-tools">
         <span class="tool-tag">PowerPoint</span>
         <span class="tool-tag">Canva</span>
@@ -241,7 +304,7 @@
       </div>
     </div>
     <div class="sample-visual">
-      <div class="img-placeholder"><span>Upload: pitch.png</span></div>
+      <img src="pitch.png" alt="Pitch decks and reports" class="sample-img" />
     </div>
   </div>
 
