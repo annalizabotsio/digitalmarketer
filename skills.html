@@ -50,6 +50,7 @@
     .tools-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 900; color: var(--ink); line-height: 1; margin-bottom: 3rem; }
     .tools-heading em { font-style: italic; color: var(--gold); }
     .tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; background: var(--border); }
+    .tool-group:last-child:nth-child(odd) { grid-column: 1 / -1; }
     .tool-group { background: var(--bg); padding: 2.5rem; }
     .tool-group-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
     .tool-list { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -63,12 +64,8 @@
     .lang-heading { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 700; color: var(--ink); line-height: 1.1; }
     .lang-heading em { font-style: italic; color: var(--gold); }
     .lang-grid { display: flex; flex-direction: column; gap: 2rem; }
-    .lang-item { display: grid; grid-template-columns: 160px 1fr; align-items: center; gap: 2rem; }
+    .lang-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .lang-name { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--ink); }
-    .lang-right { display: flex; flex-direction: column; gap: 0.4rem; }
-    .lang-level { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
-    .lang-bar { height: 2px; background: var(--border); width: 100%; }
-    .lang-bar-fill { height: 100%; background: var(--gold); transition: width 1s ease; }
 
     /* FOOTER */
     footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: var(--ink); font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; color: rgba(247,244,240,0.3); }
@@ -128,10 +125,13 @@
     <span class="disc-tag">Social Media Management</span>
     <span class="disc-tag">Data Analysis</span>
     <span class="disc-tag">Campaign Planning</span>
+    <span class="disc-tag">Campaign Management</span>
     <span class="disc-tag">Audience Segmentation</span>
     <span class="disc-tag">Conversion Optimisation</span>
     <span class="disc-tag">Performance Reporting</span>
     <span class="disc-tag">Brand Strategy</span>
+    <span class="disc-tag">Strategic Marketing</span>
+    <span class="disc-tag">Creative Campaigns</span>
   </div>
 </div>
 
@@ -147,6 +147,8 @@
         <div class="tool-item"><div class="tool-dot"></div>Mangools</div>
         <div class="tool-item"><div class="tool-dot"></div>Google Search Console</div>
         <div class="tool-item"><div class="tool-dot"></div>Canva</div>
+        <div class="tool-item"><div class="tool-dot"></div>CapCut</div>
+        <div class="tool-item"><div class="tool-dot"></div>Notion</div>
       </div>
     </div>
 
@@ -155,6 +157,9 @@
       <div class="tool-list">
         <div class="tool-item"><div class="tool-dot"></div>Klaviyo</div>
         <div class="tool-item"><div class="tool-dot"></div>Phorest</div>
+        <div class="tool-item"><div class="tool-dot"></div>Mailchimp</div>
+        <div class="tool-item"><div class="tool-dot"></div>HubSpot</div>
+        <div class="tool-item"><div class="tool-dot"></div>Gorgias</div>
       </div>
     </div>
 
@@ -163,6 +168,17 @@
       <div class="tool-list">
         <div class="tool-item"><div class="tool-dot"></div>Meta Ads Manager</div>
         <div class="tool-item"><div class="tool-dot"></div>Google Analytics 4</div>
+        <div class="tool-item"><div class="tool-dot"></div>Google Ads</div>
+        <div class="tool-item"><div class="tool-dot"></div>Yotpo</div>
+        <div class="tool-item"><div class="tool-dot"></div>Rebuy</div>
+      </div>
+    </div>
+
+    <div class="tool-group">
+      <div class="tool-group-label">Social Media Management</div>
+      <div class="tool-list">
+        <div class="tool-item"><div class="tool-dot"></div>Later</div>
+        <div class="tool-item"><div class="tool-dot"></div>Buffer</div>
       </div>
     </div>
 
@@ -170,6 +186,9 @@
       <div class="tool-group-label">Productivity & Publishing</div>
       <div class="tool-list">
         <div class="tool-item"><div class="tool-dot"></div>Shopify</div>
+        <div class="tool-item"><div class="tool-dot"></div>Google Workspace</div>
+        <div class="tool-item"><div class="tool-dot"></div>Microsoft 365</div>
+        <div class="tool-item"><div class="tool-dot"></div>Asana</div>
         <div class="tool-item"><div class="tool-dot"></div>PowerPoint</div>
       </div>
     </div>
@@ -185,25 +204,13 @@
   </div>
   <div class="lang-grid">
     <div class="lang-item">
-      <div class="lang-name">Italian</div>
-      <div class="lang-right">
-        <div class="lang-level">Native</div>
-        <div class="lang-bar"><div class="lang-bar-fill" style="width:100%"></div></div>
-      </div>
+      <div class="lang-name">English</div>
     </div>
     <div class="lang-item">
-      <div class="lang-name">English</div>
-      <div class="lang-right">
-        <div class="lang-level">Fluent</div>
-        <div class="lang-bar"><div class="lang-bar-fill" style="width:95%"></div></div>
-      </div>
+      <div class="lang-name">Italian</div>
     </div>
     <div class="lang-item">
       <div class="lang-name">Spanish</div>
-      <div class="lang-right">
-        <div class="lang-level">Conversational</div>
-        <div class="lang-bar"><div class="lang-bar-fill" style="width:55%"></div></div>
-      </div>
     </div>
   </div>
 </div>
@@ -231,4 +238,3 @@
 </script>
 </body>
 </html>
-
