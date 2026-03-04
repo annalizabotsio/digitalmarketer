@@ -30,6 +30,15 @@
     .nav-links a:hover, .nav-links a.active { color: var(--gold); }
     .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.5rem 1.3rem; text-decoration: none; transition: all 0.2s; }
     .nav-cta:hover { background: var(--ink); color: var(--bg); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: 'DM Mono', monospace; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+    .nav-mobile a:hover, .nav-mobile a.active { color: var(--gold); }
 
     /* PAGE HEADER */
     .page-header {
@@ -189,6 +198,8 @@
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
       .page-header { flex-direction: column; padding: 8rem 1.5rem 3rem; }
       .page-desc { text-align: left; }
       .cases-grid { grid-template-columns: 1fr; padding: 0; }
@@ -210,7 +221,20 @@
     <li><a href="research.html">Research</a></li>
   </ul>
   <a href="index.html#contact" class="nav-cta">Let's Talk</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">About</a>
+  <a href="work.html" class="active" onclick="toggleMenu()">Work</a>
+  <a href="media.html" onclick="toggleMenu()">Media</a>
+  <a href="skills.html" onclick="toggleMenu()">Skills</a>
+  <a href="experience.html" onclick="toggleMenu()">Experience</a>
+  <a href="research.html" onclick="toggleMenu()">Research</a>
+  <a href="index.html#contact" onclick="toggleMenu()">Let's Talk</a>
+</div>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -360,7 +384,13 @@
   <span>Built with intention.</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+<script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
   setTimeout(() => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }, 1500);
