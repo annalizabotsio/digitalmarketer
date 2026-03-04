@@ -74,8 +74,7 @@
     .ecol-right .img-placeholder { flex: 1; aspect-ratio: unset; min-height: 140px; }
     .ecol-right .sample-img { width: 100%; flex: 1; aspect-ratio: unset; min-height: 140px; object-fit: cover; }
     .ecol-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--border); min-height: 280px; }
-    .ecol-calendar-img { width: 100%; display: block; margin-top: 6px; border: 1px solid var(--border); object-fit: cover; max-height: 400px; }
-
+.ecol-calendar-img { width: 100%; display: block; margin-top: 6px; border: 1px solid var(--border); object-fit: cover; }
     /* PRESS SECTION */
     .press-section { padding: 5rem 3rem; background: var(--bg-alt); border-top: 1px solid var(--border); }
     .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; }
@@ -203,8 +202,10 @@
           <img src="emailfd.png" alt="Email campaign design" class="ecol-portrait-img" />
         </div>
       </div>
-      <img src="calendaremail1.png" alt="Email content calendar" class="ecol-calendar-img" />
-    </div>
+<div style="position:relative; margin-top:6px;">
+  <img src="calendaremail1.png" alt="Email content calendar" class="ecol-calendar-img" />
+  <div style="position:absolute; inset:0; background:rgba(28,25,22,0.55);"></div>
+</div>    </div>
   </div>
 
   <!-- 03 SOCIAL MEDIA -->
