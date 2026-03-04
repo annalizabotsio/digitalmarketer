@@ -30,21 +30,19 @@
     .nav-links a:hover { color: var(--gold); }
     .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.5rem 1.3rem; text-decoration: none; transition: all 0.2s; }
     .nav-cta:hover { background: var(--ink); color: var(--bg); }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 24px; height: 1.5px; background: var(--ink); transition: all 0.3s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .nav-mobile { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg); z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { font-family: 'DM Mono', monospace; font-size: 0.9rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+    .nav-mobile a:hover { color: var(--gold); }
 
     /* HERO */
-    #hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      padding: 9rem 3rem 5rem;
-      border-bottom: 1px solid var(--border);
-      position: relative;
-      gap: 4rem;
-    }
-
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 9rem 3rem 5rem; border-bottom: 1px solid var(--border); position: relative; gap: 4rem; }
     .hero-left { position: relative; z-index: 1; }
-    .hero-label { font-family: 'DM Mono', monospace; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; opacity: 0; animation: fadeUp 0.8s 0.2s forwards; }
     .hero-name { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 5.5vw, 5.5rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 0.4em; opacity: 0; animation: fadeUp 0.8s 0.35s forwards; }
     .hero-name em { font-style: italic; color: var(--gold); }
     .hero-intro { font-size: 1.05rem; color: var(--ink-mid); max-width: 500px; line-height: 1.8; margin-bottom: 2.5rem; opacity: 0; animation: fadeUp 0.8s 0.5s forwards; }
@@ -54,54 +52,11 @@
     .btn-primary:hover { background: var(--gold); }
     .btn-secondary { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; border: 1px solid var(--border-dark); color: var(--ink-mid); padding: 0.85rem 2rem; text-decoration: none; transition: all 0.2s; }
     .btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
-
-    /* HERO PHOTO SIDE */
-    .hero-right {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      opacity: 0;
-      animation: fadeUp 0.8s 0.8s forwards;
-      position: relative;
-    }
-    .photo-frame {
-      position: relative;
-      width: 380px;
-      max-width: 100%;
-    }
-    .photo-frame::before {
-      content: '';
-      position: absolute;
-      top: -16px;
-      left: -16px;
-      right: 16px;
-      bottom: 16px;
-      border: 1px solid var(--gold);
-      z-index: 0;
-      opacity: 0.5;
-    }
-    .photo-frame img {
-      width: 100%;
-      display: block;
-      position: relative;
-      z-index: 1;
-      filter: grayscale(8%);
-      object-fit: cover;
-      aspect-ratio: 3/4;
-    }
-    .photo-tag {
-      position: absolute;
-      bottom: -1.5rem;
-      right: -1rem;
-      background: var(--ink);
-      color: var(--bg);
-      font-family: 'DM Mono', monospace;
-      font-size: 0.58rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 0.5rem 1rem;
-      z-index: 2;
-    }
+    .hero-right { display: flex; justify-content: center; align-items: flex-end; opacity: 0; animation: fadeUp 0.8s 0.8s forwards; position: relative; }
+    .photo-frame { position: relative; width: 380px; max-width: 100%; }
+    .photo-frame::before { content: ''; position: absolute; top: -16px; left: -16px; right: 16px; bottom: 16px; border: 1px solid var(--gold); z-index: 0; opacity: 0.5; }
+    .photo-frame img { width: 100%; display: block; position: relative; z-index: 1; filter: grayscale(8%); object-fit: cover; aspect-ratio: 3/4; }
+    .photo-tag { position: absolute; bottom: -1.5rem; right: -1rem; background: var(--ink); color: var(--bg); font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.5rem 1rem; z-index: 2; }
 
     /* NUMBERS STRIP */
     #numbers { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ink); }
@@ -117,11 +72,9 @@
     .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 4rem; }
     .section-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--gold); }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; }
-
     .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
     .about-text p { font-size: 1rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.4rem; }
     .about-text strong { color: var(--ink); font-weight: 500; }
-
     .detail-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--border); }
     .detail-key { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
     .detail-val { font-size: 0.85rem; color: var(--ink-mid); text-align: right; line-height: 1.5; }
@@ -147,6 +100,8 @@
     @media (max-width: 900px) {
       nav { padding: 1.2rem 1.5rem; }
       .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
       #hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 5rem; gap: 3rem; }
       .hero-right { justify-content: center; }
       .photo-frame { width: 280px; }
@@ -170,7 +125,20 @@
     <li><a href="research.html">Research</a></li>
   </ul>
   <a href="#contact" class="nav-cta">Let's Talk</a>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-mobile" id="mobileMenu">
+  <a href="index.html" onclick="toggleMenu()">About</a>
+  <a href="work.html" onclick="toggleMenu()">Work</a>
+  <a href="media.html" onclick="toggleMenu()">Media</a>
+  <a href="skills.html" onclick="toggleMenu()">Skills</a>
+  <a href="experience.html" onclick="toggleMenu()">Experience</a>
+  <a href="research.html" onclick="toggleMenu()">Research</a>
+  <a href="#contact" onclick="toggleMenu()">Let's Talk</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -231,7 +199,7 @@
       <div class="detail-row"><span class="detail-key">Specialisms</span><span class="detail-val">Email · SEO · Paid Social · Content Strategy</span></div>
       <div class="detail-row"><span class="detail-key">Tools</span><span class="detail-val">Klaviyo · GA4 · Meta Ads · Mangools · WordPress</span></div>
       <div class="detail-row"><span class="detail-key">Markets</span><span class="detail-val">UK · Ireland · Australia · United States</span></div>
-      <div class="detail-row"><span class="detail-key">Languages</span><span class="detail-val">English · Italian</span></div>
+      <div class="detail-row"><span class="detail-key">Languages</span><span class="detail-val">English · Italian · Spanish</span></div>
     </div>
   </div>
 </section>
@@ -242,7 +210,7 @@
   <h2 class="contact-heading reveal">Ready to drive<br><em>real results?</em></h2>
   <p class="contact-sub reveal">Available for full-time roles and freelance projects across marketing, content, and digital strategy.</p>
   <div class="contact-links reveal">
-    <a href="/cdn-cgi/l/email-protection#aed7c1dbdceecbc3cfc7c280cdc1c3" class="btn-primary">Send Me an Email</a>
+    <a href="mailto:annalizabotsio@gmail.com" class="btn-primary">Send Me an Email</a>
     <a href="https://linkedin.com/in/annalizabotsio" target="_blank" class="btn-secondary">LinkedIn</a>
   </div>
 </section>
@@ -253,8 +221,12 @@
   <span>Built with intention.</span>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Fallback: show all reveal elements after 1.5s in case observer fails
+<script>
+  function toggleMenu() {
+    document.getElementById('hamburger').classList.toggle('open');
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
   setTimeout(() => {
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   }, 1500);
