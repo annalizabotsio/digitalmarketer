@@ -71,7 +71,7 @@
     .ecol-stat-val { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.8); }
     .ecol-stat-val.highlight { color: #c9a86c; font-weight: 500; }
     .ecol-right { display: flex; flex-direction: column; gap: 6px; }
-    .ecol-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--border); min-height: 280px; }
+    .ecol-portrait-img { width: 100%; object-fit: cover; object-position: top; display: block; border: 1px solid var(--border); max-height: 320px; }
     .ecol-calendar-wrap { position: relative; margin-top: 6px; }
     .ecol-calendar-img { width: 100%; display: block; border: 1px solid var(--border); }
     .ecol-calendar-overlay { position: absolute; inset: 0; background: rgba(28,25,22,0.55); }
@@ -91,8 +91,8 @@
     .scol-stat-name { font-size: 0.68rem; color: rgba(255,255,255,0.45); }
     .scol-stat-val { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: rgba(255,255,255,0.8); white-space: nowrap; }
     .scol-stat-val.highlight { color: #c9a86c; font-weight: 500; }
-    .scol-right img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--border); }
-    .social-bottom img { width: 100%; display: block; border: 1px solid var(--border); }
+    .scol-right img { width: 100%; object-fit: cover; object-position: top; display: block; border: 1px solid var(--border); max-height: 320px; }
+    .social-bottom img { width: 100%; display: block; border: 1px solid var(--border); max-height: 280px; object-fit: cover; object-position: top; }
 
     /* PRESS SECTION */
     .press-section { padding: 5rem 3rem; background: var(--bg-alt); border-top: 1px solid var(--border); }
@@ -277,11 +277,11 @@
             </div>
           </div>
           <div class="scol-right">
-            <img src="social-tiktok.jpg" alt="TikTok content" />
+            <img src="social-tiktok.png" alt="TikTok content" />
           </div>
         </div>
         <div class="social-bottom">
-          <img src="social-instagram.jpg" alt="Instagram grid" />
+          <img src="social-instagram.png" alt="Instagram grid" />
         </div>
       </div>
     </div>
