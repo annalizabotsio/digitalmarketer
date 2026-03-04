@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Media — Annaliza Botsio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f7f4f0;
+      --bg-alt: #f0ece6;
+      --card: #ffffff;
+      --border: #e0dbd3;
+      --border-dark: #ccc6bc;
+      --ink: #1c1916;
+      --ink-mid: #3d3830;
+      --muted: #8a8076;
+      --gold: #9a7a45;
+      --gold-soft: rgba(154,122,69,0.1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(247,244,240,0.93); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { font-family: 'DM Mono', monospace; font-size: 0.67rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border: 1px solid var(--ink); padding: 0.5rem 1.3rem; text-decoration: none; transition: all 0.2s; }
+    .nav-cta:hover { background: var(--ink); color: var(--bg); }
+
+    /* PAGE HEADER */
+    .page-header { padding: 10rem 3rem 5rem; border-bottom: 1px solid var(--border); display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; }
+    .page-label { font-family: 'DM Mono', monospace; font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .page-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 6rem); font-weight: 900; line-height: 0.95; letter-spacing: -0.02em; color: var(--ink); }
+    .page-title em { font-style: italic; color: var(--gold); }
+    .page-desc { font-size: 1rem; color: var(--muted); max-width: 380px; line-height: 1.7; text-align: right; }
+
+    /* WORK SAMPLES */
+    .samples-wrapper { padding: 5rem 3rem; display: flex; flex-direction: column; gap: 0; }
+
+    .sample { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; padding: 5rem 0; border-bottom: 1px solid var(--border); }
+    .sample:nth-child(even) { direction: rtl; }
+    .sample:nth-child(even) > * { direction: ltr; }
+
+    .sample-info {}
+    .sample-num { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 0.5rem; }
+    .sample-category { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+    .sample-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 1rem; }
+    .sample-desc { font-size: 0.9rem; color: var(--ink-mid); line-height: 1.8; margin-bottom: 1.5rem; max-width: 380px; }
+    .sample-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tool-tag { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--border); padding: 0.25rem 0.6rem; }
+
+    /* IMAGE SLOT */
+    .sample-visual { position: relative; }
+    .sample-img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--border);
+    }
+    .img-placeholder {
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: var(--bg-alt);
+      border: 1px dashed var(--border-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .img-placeholder span { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+    /* PRESS SECTION */
+    .press-section { padding: 5rem 3rem; background: var(--bg-alt); border-top: 1px solid var(--border); }
+    .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; }
+    .section-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--gold); }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; }
+
+    .press-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .press-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; display: block; }
+    .press-card:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(154,122,69,0.07); }
+    .press-outlet { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; }
+    .press-headline { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 0.8rem; }
+    .press-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 1.2rem; }
+    .press-link { font-family: 'DM Mono', monospace; font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-mid); display: flex; align-items: center; gap: 0.4rem; }
+    .press-link::after { content: '→'; }
+
+    /* FOOTER */
+    footer { padding: 2rem 3rem; display: flex; justify-content: space-between; align-items: center; background: var(--ink); font-family: 'DM Mono', monospace; font-size: 0.57rem; letter-spacing: 0.1em; color: rgba(247,244,240,0.3); }
+
+    /* ANIMATIONS */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .page-header { flex-direction: column; padding: 8rem 1.5rem 3rem; }
+      .page-desc { text-align: left; }
+      .samples-wrapper { padding: 3rem 1.5rem; }
+      .sample { grid-template-columns: 1fr; gap: 2rem; direction: ltr !important; }
+      .sample:nth-child(even) { direction: ltr; }
+      .press-grid { grid-template-columns: 1fr; }
+      .press-section { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">AB</a>
+  <ul class="nav-links">
+    <li><a href="index.html">About</a></li>
+    <li><a href="work.html">Work</a></li>
+    <li><a href="media.html" class="active">Media</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="research.html">Research</a></li>
+  </ul>
+  <a href="index.html#contact" class="nav-cta">Let's Talk</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div>
+    <div class="page-label">Work Samples & Press</div>
+    <h1 class="page-title">Media &<br><em>Coverage</em></h1>
+  </div>
+  <p class="page-desc">A selection of real work — content I've created, campaigns I've run, and platforms that have featured my writing.</p>
+</div>
+
+<!-- WORK SAMPLES -->
+<div class="samples-wrapper">
+
+  <!-- 01 SEO BLOG -->
+  <div class="sample reveal">
+    <div class="sample-info">
+      <div class="sample-num">01</div>
+      <div class="sample-category">SEO & Content Strategy</div>
+      <h2 class="sample-title">SEO Blog Content</h2>
+      <p class="sample-desc">140+ SEO-optimised articles produced for Face Dr across UK, US, Irish, and Australian markets. Keyword research via Mangools, on-page optimisation, and the They Ask You Answer methodology — driving 144% blog traffic growth.</p>
+      <div class="sample-tools">
+        <span class="tool-tag">WordPress</span>
+        <span class="tool-tag">Mangools</span>
+        <span class="tool-tag">Google Search Console</span>
+      </div>
+    </div>
+    <div class="sample-visual">
+      <!-- Replace src with your actual screenshot filename e.g. assets/seo-blog.png -->
+      <div class="img-placeholder">
+        <span>Upload: assets/seo-blog.png</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 EMAIL -->
+  <div class="sample reveal">
+    <div class="sample-info">
+      <div class="sample-num">02</div>
+      <div class="sample-category">Email Marketing</div>
+      <h2 class="sample-title">Email Campaigns</h2>
+      <p class="sample-desc">Email campaigns built and deployed via Phorest and Klaviyo for Tay Medispa and Face Dr. Audience segmentation, personalised copy, and lifecycle messaging — contributing to £282,990 in revenue over six months.</p>
+      <div class="sample-tools">
+        <span class="tool-tag">Klaviyo</span>
+        <span class="tool-tag">Phorest</span>
+        <span class="tool-tag">Segmentation</span>
+      </div>
+    </div>
+    <div class="sample-visual">
+      <!-- Replace src with your actual screenshot filename e.g. assets/email.png -->
+      <div class="img-placeholder">
+        <span>Upload: assets/email.png</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 SOCIAL MEDIA -->
+  <div class="sample reveal">
+    <div class="sample-info">
+      <div class="sample-num">03</div>
+      <div class="sample-category">Social Media</div>
+      <h2 class="sample-title">Social Media Content</h2>
+      <p class="sample-desc">Organic social content scripted, filmed, edited, and published in-house across Instagram, TikTok, Facebook, and YouTube for Face Dr and Tay Medispa. TikTok audience grew 807% with 50,000+ video views.</p>
+      <div class="sample-tools">
+        <span class="tool-tag">Instagram</span>
+        <span class="tool-tag">TikTok</span>
+        <span class="tool-tag">Canva</span>
+        <span class="tool-tag">Video Editing</span>
+      </div>
+    </div>
+    <div class="sample-visual">
+      <!-- Replace src with your actual screenshot filename e.g. assets/social.png -->
+      <div class="img-placeholder">
+        <span>Upload: assets/social.png</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 PITCH DECK -->
+  <div class="sample reveal">
+    <div class="sample-info">
+      <div class="sample-num">04</div>
+      <div class="sample-category">Presentations</div>
+      <h2 class="sample-title">Pitch Decks & Reports</h2>
+      <p class="sample-desc">Performance presentations and pitch decks produced for senior stakeholder meetings at Face Dr and Tay Medispa. Included campaign results, strategic recommendations, and monthly data analysis.</p>
+      <div class="sample-tools">
+        <span class="tool-tag">PowerPoint</span>
+        <span class="tool-tag">Canva</span>
+        <span class="tool-tag">Google Analytics</span>
+      </div>
+    </div>
+    <div class="sample-visual">
+      <!-- Replace src with your actual screenshot filename e.g. assets/pitch.png -->
+      <div class="img-placeholder">
+        <span>Upload: assets/pitch.png</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 WEBSITE COPY -->
+  <div class="sample reveal">
+    <div class="sample-info">
+      <div class="sample-num">05</div>
+      <div class="sample-category">Website Copy & Landing Pages</div>
+      <h2 class="sample-title">Website Copy & Landing Pages</h2>
+      <p class="sample-desc">Product landing pages and website copy written, published, and optimised for UK, US, Irish, and Australian markets. Focused on SEO alignment and conversion optimisation across Shopify and WordPress.</p>
+      <div class="sample-tools">
+        <span class="tool-tag">Shopify</span>
+        <span class="tool-tag">WordPress</span>
+        <span class="tool-tag">SEO</span>
+      </div>
+    </div>
+    <div class="sample-visual">
+      <!-- Replace src with your actual screenshot filename e.g. assets/website.png -->
+      <div class="img-placeholder">
+        <span>Upload: assets/website.png</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 VIDEO -->
+  <div class="sample reveal">
+    <div class="sample-info">
+      <div class="sample-num">06</div>
+      <div class="sample-category">Video Content</div>
+      <h2 class="sample-title">Video Content</h2>
+      <p class="sample-desc">Short-form and long-form video content produced for YouTube, TikTok, Instagram Reels, and Facebook. Scripted, filmed, and edited in-house — covering skincare education, product reviews, and brand storytelling.</p>
+      <div class="sample-tools">
+        <span class="tool-tag">YouTube</span>
+        <span class="tool-tag">TikTok</span>
+        <span class="tool-tag">Video Editing</span>
+        <span class="tool-tag">Canva</span>
+      </div>
+    </div>
+    <div class="sample-visual">
+      <!-- Replace src with your actual screenshot filename e.g. assets/video.png -->
+      <div class="img-placeholder">
+        <span>Upload: assets/video.png</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- PRESS COVERAGE -->
+<div class="press-section">
+  <div class="section-header reveal">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Press & Features</h2>
+  </div>
+  <div class="press-grid">
+
+    <a href="https://www.mirror.co.uk" target="_blank" class="press-card reveal">
+      <div class="press-outlet">The Mirror</div>
+      <div class="press-headline">Face Dr featured in national press coverage</div>
+      <div class="press-desc">Content and SEO strategy contributed to Face Dr earning a backlink and feature in The Mirror — one of 267 referring domains built through organic content.</div>
+      <div class="press-link">View coverage</div>
+    </a>
+
+    <a href="https://www.manchestereveningnews.co.uk" target="_blank" class="press-card reveal">
+      <div class="press-outlet">Manchester Evening News</div>
+      <div class="press-headline">Organic content driving national media pickups</div>
+      <div class="press-desc">SEO-driven blog content earned a feature in Manchester Evening News, demonstrating the reach of a well-executed content strategy beyond paid promotion.</div>
+      <div class="press-link">View coverage</div>
+    </a>
+
+    <a href="https://www.glam.com" target="_blank" class="press-card reveal">
+      <div class="press-outlet">Glam.com</div>
+      <div class="press-headline">International beauty press feature</div>
+      <div class="press-desc">Face Dr content earned a feature on Glam.com, an international beauty and lifestyle publication — evidence of content strategy reaching audiences beyond the UK.</div>
+      <div class="press-link">View coverage</div>
+    </a>
+
+    <a href="https://www.entrepreneurialscotland.com/scholar-blog/my-virtual-internship-with-pe-gi-solutions" target="_blank" class="press-card reveal">
+      <div class="press-outlet">Entrepreneurial Scotland</div>
+      <div class="press-headline">My Virtual Internship with PE GI Solutions</div>
+      <div class="press-desc">A published reflection on my remote B2B marketing internship with a US healthcare provider — featured on the Entrepreneurial Scotland Saltire Scholar blog.</div>
+      <div class="press-link">Read article</div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Annaliza Botsio</span>
+  <span>Digital Marketer</span>
+  <span>Built with intention.</span>
+</footer>
+
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+  }, 1500);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.01 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
