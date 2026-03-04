@@ -40,12 +40,9 @@
 
     /* WORK SAMPLES */
     .samples-wrapper { padding: 5rem 3rem; display: flex; flex-direction: column; gap: 0; }
-
     .sample { display: grid; grid-template-columns: 1fr 1.4fr; gap: 5rem; align-items: center; padding: 5rem 0; border-bottom: 1px solid var(--border); }
     .sample:nth-child(even) { direction: rtl; }
     .sample:nth-child(even) > * { direction: ltr; }
-
-    .sample-info {}
     .sample-num { font-family: 'Playfair Display', serif; font-size: 5rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 0.5rem; }
     .sample-category { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
     .sample-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--ink); line-height: 1.2; margin-bottom: 1rem; }
@@ -55,32 +52,35 @@
 
     /* IMAGE SLOT */
     .sample-visual { position: relative; }
-    .sample-img {
-      width: 100%;
-      aspect-ratio: 16/10;
-      object-fit: cover;
-      display: block;
-      border: 1px solid var(--border);
-    }
-    .img-placeholder {
-      width: 100%;
-      aspect-ratio: 16/10;
-      background: var(--bg-alt);
-      border: 1px dashed var(--border-dark);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
+    .sample-img { width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block; border: 1px solid var(--border); }
+    .img-placeholder { width: 100%; aspect-ratio: 16/10; background: var(--bg-alt); border: 1px dashed var(--border-dark); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; }
     .img-placeholder span { font-family: 'DM Mono', monospace; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+
+    /* EMAIL COLLAGE */
+    .email-collage { display: grid; grid-template-columns: 1.1fr 1fr; gap: 6px; width: 100%; }
+    .ecol-dashboard { background: #1c2b3a; padding: 1.8rem; display: flex; flex-direction: column; gap: 0.4rem; position: relative; overflow: hidden; }
+    .ecol-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(to right, #c9a86c, #9a7a45); }
+    .ecol-platform { font-family: 'DM Mono', monospace; font-size: 0.55rem; letter-spacing: 0.18em; text-transform: uppercase; color: #c9a86c; }
+    .ecol-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #f7f4f0; margin-top: 0.2rem; }
+    .ecol-brand { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); margin-bottom: 0.8rem; }
+    .ecol-revenue { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 900; color: #c9a86c; line-height: 1; }
+    .ecol-revenue-label { font-family: 'DM Mono', monospace; font-size: 0.5rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1rem; }
+    .ecol-stats { display: flex; flex-direction: column; }
+    .ecol-stat { display: flex; justify-content: space-between; align-items: center; padding: 0.55rem 0; border-top: 1px solid rgba(255,255,255,0.07); }
+    .ecol-stat-name { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+    .ecol-stat-val { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.8); }
+    .ecol-stat-val.highlight { color: #c9a86c; font-weight: 500; }
+    .ecol-right { display: flex; flex-direction: column; gap: 6px; }
+    .ecol-right .img-placeholder { flex: 1; aspect-ratio: unset; min-height: 140px; }
+    .ecol-right .sample-img { width: 100%; flex: 1; aspect-ratio: unset; min-height: 140px; object-fit: cover; }
+    .ecol-portrait-img { width: 100%; height: 100%; object-fit: cover; display: block; border: 1px solid var(--border); min-height: 280px; }
+    .ecol-calendar-img { width: 100%; display: block; margin-top: 6px; border: 1px solid var(--border); object-fit: cover; max-height: 220px; }
 
     /* PRESS SECTION */
     .press-section { padding: 5rem 3rem; background: var(--bg-alt); border-top: 1px solid var(--border); }
     .section-header { display: flex; align-items: baseline; gap: 1.5rem; margin-bottom: 3rem; }
     .section-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; letter-spacing: 0.22em; color: var(--gold); }
     .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 3rem); font-weight: 700; color: var(--ink); line-height: 1.1; }
-
     .press-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
     .press-card { background: var(--card); border: 1px solid var(--border); padding: 2rem; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; display: block; }
     .press-card:hover { border-color: var(--gold); box-shadow: 0 4px 20px rgba(154,122,69,0.07); }
@@ -106,6 +106,7 @@
       .samples-wrapper { padding: 3rem 1.5rem; }
       .sample { grid-template-columns: 1fr; gap: 2rem; direction: ltr !important; }
       .sample:nth-child(even) { direction: ltr; }
+      .email-collage { grid-template-columns: 1fr; }
       .press-grid { grid-template-columns: 1fr; }
       .press-section { padding: 3rem 1.5rem; }
       footer { flex-direction: column; gap: 0.5rem; text-align: center; }
@@ -139,7 +140,7 @@
 <!-- WORK SAMPLES -->
 <div class="samples-wrapper">
 
-  <!-- 01 SEO BLOG -->
+  <!-- 01 SEO BLOG — image already uploaded -->
   <div class="sample reveal">
     <div class="sample-info">
       <div class="sample-num">01</div>
@@ -153,12 +154,11 @@
       </div>
     </div>
     <div class="sample-visual">
-      <!-- Replace src with your actual screenshot filename e.g. assets/seo-blog.png.png -->
       <img src="seo-blog.png.png" alt="SEO Blog Content" class="sample-img" />
     </div>
   </div>
 
-  <!-- 02 EMAIL -->
+  <!-- 02 EMAIL — collage with stats panel + 2 screenshot slots -->
   <div class="sample reveal">
     <div class="sample-info">
       <div class="sample-num">02</div>
@@ -172,10 +172,38 @@
       </div>
     </div>
     <div class="sample-visual">
-      <!-- Replace src with your actual screenshot filename e.g. assets/email.png -->
-      <div class="img-placeholder">
-        <span>Upload: assets/email.png</span>
+      <div class="email-collage">
+        <div class="ecol-dashboard">
+          <div class="ecol-top-bar"></div>
+          <div class="ecol-platform">Phorest CRM</div>
+          <div class="ecol-title">Email Revenue Overview</div>
+          <div class="ecol-brand">Tay Medispa · 6 month period</div>
+          <div class="ecol-revenue">£282,990</div>
+          <div class="ecol-revenue-label">Total email revenue</div>
+          <div class="ecol-stats">
+            <div class="ecol-stat">
+              <span class="ecol-stat-name">Avg. open rate</span>
+              <span class="ecol-stat-val highlight">42.3%</span>
+            </div>
+            <div class="ecol-stat">
+              <span class="ecol-stat-name">Industry avg. (Health & Beauty)</span>
+              <span class="ecol-stat-val">30.5%</span>
+            </div>
+            <div class="ecol-stat">
+              <span class="ecol-stat-name">Above benchmark by</span>
+              <span class="ecol-stat-val highlight">+11.8 pts</span>
+            </div>
+            <div class="ecol-stat">
+              <span class="ecol-stat-name">Weekly sends scaled</span>
+              <span class="ecol-stat-val">1 → 3</span>
+            </div>
+          </div>
+        </div>
+        <div class="ecol-right">
+          <img src="emailfd.png" alt="Email campaign design" class="ecol-portrait-img" />
+        </div>
       </div>
+      <img src="calendaremail.png" alt="Email content calendar" class="ecol-calendar-img" />
     </div>
   </div>
 
@@ -194,10 +222,7 @@
       </div>
     </div>
     <div class="sample-visual">
-      <!-- Replace src with your actual screenshot filename e.g. assets/social.png -->
-      <div class="img-placeholder">
-        <span>Upload: assets/social.png</span>
-      </div>
+      <div class="img-placeholder"><span>Upload: social.png</span></div>
     </div>
   </div>
 
@@ -215,10 +240,7 @@
       </div>
     </div>
     <div class="sample-visual">
-      <!-- Replace src with your actual screenshot filename e.g. assets/pitch.png -->
-      <div class="img-placeholder">
-        <span>Upload: assets/pitch.png</span>
-      </div>
+      <div class="img-placeholder"><span>Upload: pitch.png</span></div>
     </div>
   </div>
 
@@ -236,10 +258,7 @@
       </div>
     </div>
     <div class="sample-visual">
-      <!-- Replace src with your actual screenshot filename e.g. assets/website.png -->
-      <div class="img-placeholder">
-        <span>Upload: assets/website.png</span>
-      </div>
+      <div class="img-placeholder"><span>Upload: website.png</span></div>
     </div>
   </div>
 
@@ -258,10 +277,7 @@
       </div>
     </div>
     <div class="sample-visual">
-      <!-- Replace src with your actual screenshot filename e.g. assets/video.png -->
-      <div class="img-placeholder">
-        <span>Upload: assets/video.png</span>
-      </div>
+      <div class="img-placeholder"><span>Upload: video.png</span></div>
     </div>
   </div>
 
